@@ -95,7 +95,7 @@ const BayWindowSlider = () => {
         position: "2nd Runner-Up"
       },
       image:"/gallery/dsa-fast-2.png"
-    }
+  
   ];
 
   // Auto-rotation logic
@@ -204,7 +204,7 @@ const BayWindowSlider = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-hidden">
+    <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <motion.div
@@ -237,9 +237,9 @@ const BayWindowSlider = () => {
       {/* Main Carousel Container */}
       <div className="relative w-full max-w-7xl mx-auto px-4 h-full flex items-center justify-center">
         {/* 3D Carousel Container */}
-        <div 
+        <div
           ref={containerRef}
-          className="relative h-64 md:h-80 lg:h-96 w-full flex items-center justify-center cursor-pointer"
+          className="relative h-48 md:h-64 lg:h-80 xl:h-96 w-full flex items-center justify-center cursor-pointer"
           style={{ 
             perspective: window.innerWidth < 640 ? '800px' : 
                         window.innerWidth < 1024 ? '1000px' : '1200px',
