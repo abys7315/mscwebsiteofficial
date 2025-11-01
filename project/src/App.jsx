@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Events from './pages/Events';
 import Gallery from './pages/Gallery';
+import EventDetail from './pages/EventDetail';
 import Team from './pages/Team';
 import Contact from './pages/Contact';
 import CertificateValidation from './pages/CertificateValidation';
@@ -29,6 +30,7 @@ function App() {
             <Route path="/about" element={<PageTransition><About /></PageTransition>} />
             <Route path="/events" element={<PageTransition><Events /></PageTransition>} />
             <Route path="/gallery" element={<PageTransition><Gallery /></PageTransition>} />
+            <Route path="/event/:id" element={<PageTransition><EventDetail /></PageTransition>} />
             <Route path="/team" element={<PageTransition><Team /></PageTransition>} />
             <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
             <Route path="/certificate" element={<PageTransition><CertificateValidation /></PageTransition>} />
@@ -41,7 +43,7 @@ function App() {
         </AnimatePresence>
       </main>
       <Footer />
-      <Toaster 
+      <Toaster
         position="top-center"
         toastOptions={{
           style: {

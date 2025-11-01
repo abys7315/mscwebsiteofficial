@@ -26,13 +26,10 @@ const Footer = () => {
               Empowering students through Microsoft technologies and innovation at VIT-AP University.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="p-3 apple-card hover:bg-apple-blue hover:text-white transition-all duration-300 hover:scale-110">
+              <a href="https://www.linkedin.com/company/microsoft-student-chapter-vit-ap/" target="_blank" rel="noopener noreferrer" className="p-3 apple-card hover:bg-apple-blue hover:text-white transition-all duration-300 hover:scale-110">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="p-3 apple-card hover:bg-apple-blue hover:text-white transition-all duration-300 hover:scale-110">
-                <Github className="w-5 h-5" />
-              </a>
-              <a href="#" className="p-3 apple-card hover:bg-apple-blue hover:text-white transition-all duration-300 hover:scale-110">
+              <a href="https://www.instagram.com/msc_vitap?igsh=MzBocmYwNXU2MTJj" target="_blank" rel="noopener noreferrer" className="p-3 apple-card hover:bg-apple-blue hover:text-white transition-all duration-300 hover:scale-110">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
@@ -70,13 +67,7 @@ const Footer = () => {
                 <div className="w-10 h-10 bg-apple-blue rounded-xl flex items-center justify-center">
                   <Mail className="w-4 h-4 text-white" />
                 </div>
-                <span className="font-medium">contact@msc-vitap.org</span>
-              </li>
-              <li className="flex items-center gap-3 text-apple-gray-600 dark:text-apple-gray-300">
-                <div className="w-10 h-10 bg-purple-500 rounded-xl flex items-center justify-center">
-                  <Phone className="w-4 h-4 text-white" />
-                </div>
-                <span className="font-medium">+91 (555) 123-4567</span>
+                <span className="font-medium">microsoft.chap@vitap.ac.in</span>
               </li>
               <li className="flex items-center gap-3 text-apple-gray-600 dark:text-apple-gray-300">
                 <div className="w-10 h-10 bg-apple-blue rounded-xl flex items-center justify-center">

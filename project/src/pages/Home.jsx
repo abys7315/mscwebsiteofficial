@@ -50,10 +50,10 @@ const Home = () => {
   ];
 
   const stats = [
-    { number: 500, suffix: "+", label: "Active Members", icon: Users, color: "#007AFF" },
-    { number: 50, suffix: "+", label: "Events Hosted", icon: Calendar, color: "#5856D6" },
-    { number: 100, suffix: "+", label: "Projects Completed", icon: Award, color: "#007AFF" },
-    { number: 25, suffix: "+", label: "Industry Partners", icon: Star, color: "#5856D6" }
+    { number: 150, suffix: "+", label: "Active Members", icon: Users, color: "#007AFF" },
+    { number: 15, suffix: "+", label: "Events Hosted", icon: Calendar, color: "#5856D6" },
+    { number: 10, suffix: "+", label: "Projects Completed", icon: Award, color: "#007AFF" },
+    { number: 1, suffix: "", label: "Industry Partners", icon: Star, color: "#5856D6" }
   ];
 
   // Animated Counter Component
@@ -377,8 +377,8 @@ const Home = () => {
             transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
             className="text-center mt-12"
           >
-            <Link to="/events">
-              <motion.button 
+            <Link to="/gallery">
+              <motion.button
                 className="apple-button-secondary px-8 py-4 text-lg flex items-center gap-3 mx-auto"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

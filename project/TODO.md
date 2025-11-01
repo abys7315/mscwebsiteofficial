@@ -1,11 +1,12 @@
-# Event Gallery Enhancement TODO
+# Gallery Enhancement TODO
 
-## Tasks to Complete
-- [x] Restructure Gallery.jsx to group images by events instead of flat grid
-- [x] Create event sections with titles as headers
-- [x] Implement carousel/slider component for multiple images per event
-- [x] Add lightbox/modal for full-size image viewing on click
-- [x] Make layout responsive with proper grid/masonry arrangement
-- [x] Update mock data to include multiple images per event
-- [ ] Test responsive design on different screen sizes
-- [ ] Add loading states and error handling for images
+## Tasks
+- [x] Create project/public/gallery/ folder for event images
+- [x] Create project/src/pages/EventDetail.jsx component
+- [x] Update project/src/App.jsx to add /event/:id route
+- [x] Update project/src/pages/Gallery.jsx: make events clickable, add winner/runner-up data, update image URLs
+- [x] Add DSA QUEST event details to Gallery and EventDetail components
+- [x] Add The CIPHER SAGA event details to Gallery and EventDetail components
+- [x] Add CS QUEST event details to Gallery and EventDetail components
+- [ ] Add sample images to gallery folder and update code accordingly
+- [ ] Test navigation and detail page functionality

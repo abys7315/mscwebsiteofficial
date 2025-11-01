@@ -11,64 +11,90 @@ const BayWindowSlider = () => {
 
   const events = [
     {
-      id: 1,
-      title: "Azure Cloud Workshop",
-      date: "March 15, 2024",
-      time: "2:00 PM",
-      location: "Microsoft Lab, Block A",
-      attendees: "50+",
+      id: 7,
+      title: "Matrix Hackathon",
+      date: "27th September, 2025",
+      location: "CB-507",
+      attendees: "Various",
       status: "COMPLETED",
-      image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?q=80&w=1000&auto=format&fit=crop",
-      description: "Comprehensive workshop covering Azure fundamentals and cloud deployment strategies.",
-      rating: "4.8"
+      description: "Matrix Hackathon 2025 – Innovate. Solve. Conquer. The Microsoft Student Chapter proudly organized Matrix Hackathon 2025 on September 27th, 2025, at CB-507, bringing together brilliant young innovators, designers, and developers for an exciting day of creativity, coding, and problem solving. The event challenged participants to think beyond conventional boundaries and turn bold ideas into impactful solutions. At the start, each team drew a chit that determined their journey ahead: • Red Path – Innovators: Teams created their own problem statements and developed original solutions from scratch. • Blue Path – Solvers: Teams tackled curated, research-level problem statements provided by the organizers. The hackathon unfolded in two engaging and competitive rounds: Round 1 – The Reality Check (9 AM – 1 PM): Teams kick-started the day with a shark tank–style pitch, presenting their ideas, proposed solutions, and business models. Judges assessed clarity of thought, innovation, feasibility, and impact—rewarding teams that combined creativity with practicality. Round 2 – Portal to Prototype (2 PM – 6 PM): After validating their ideas, teams entered the development phase to build working prototypes while meeting progress checkpoints. Midway, a surprise feature twist tested their adaptability and teamwork under pressure. The round concluded with final prototype presentations, evaluated on technical execution, creativity, functionality, and overall presentation. The event concluded with the announcement of two major winners: • Red Pill Winner: Best innovation from self-created ideas. • Blue Pill Winner: Best solution from provided problem statements. Matrix Hackathon 2025 stood as a testament to innovation under pressure— celebrating creativity, collaboration, and technical excellence. Participants left with enhanced skills, real-world experience, and the thrill of bringing their visions to life. Choose your path. Build your vision. Claim your victory.",
+      winner: {
+        name: "404 Found (Blue Pill Winner)",
+        position: "Winner"
+      },
+      runnerUp1: {
+        name: "Ignite (Blue Pill Runner-Up)",
+        position: "1st Runner-Up"
+      },
+      runnerUp2: {
+        name: "Marine Drive (Red Pill Winner) & Zeroday (Red Pill Runner-Up)",
+        position: "2nd Runner-Up"
+      },
+      image:"/gallery/matrix-3.png"
+    },
+    {
+      id: 10,
+      title: "Future-Ready Computing: The Memory Shift",
+      date: "19th September, 2025",
+      location: "Google Meet",
+      attendees: "Various",
+      status: "COMPLETED",
+      description: "The Microsoft Student Chapter of VIT-AP University conducted an online session titled 'Future-Ready Computing: The Memory Shift'. The session was delivered by Dr. Arijit Nath, an Assistant Professor at IIIT Guwahati. The primary objective of the event was to provide participants with a comprehensive overview of advancements in computing systems and emerging memory technologies that are shaping the future of computing. Dr. Nath divided the presentation into two main parts. • Part A, Advancement in Computing Systems, explored the historical development of computers, focusing on Moore's Law and the subsequent challenges of the 'Power Wall' and 'Memory Wall'. It covered the paradigm shift from single-core to multi-core processors and the rise of specialized accelerators like GPUs and TPUs to handle modern workloads. • Part B, Emerging Memory Technologies, delved into innovative solutions designed to overcome current bottlenecks. Key topics included Near Data Processing (NDP), Emerging Non-Volatile Memories (NVM), Intermittent Computing for low-power IoT devices, and Disaggregated Memory Systems. Dr. Nath also shared insights from his own thesis work on enhancing the endurance of Non-Volatile Memory. Through this session, participants gained valuable insights into the architectural evolution of computers and the critical role of memory innovation in supporting demanding applications like AI, Machine Learning, and Big Data Analytics. The event encouraged students to understand the core challenges in computer architecture and explore the future of high performance, energy-efficient computing.",
+      image:"/gallery/memory-shift-1.png"
+    },
+    {
+      id: 9,
+      title: "Near-Data Processing",
+      date: "9th September, 2025",
+      location: "Google Meet",
+      attendees: "Various",
+      status: "COMPLETED",
+      description: "The Microsoft Student Chapter of VIT-AP University conducted an online session titled 'Near Data processing: An Emerging computer paradigm' on 9th September at 9:00 PM via Google Meet. Key Insights from Guest Lecture on Near-Data Processing: The guest lecture highlighted several crucial aspects of modern computing challenges and opportunities. The session emphasized sustainability in computing, where near-data processing reduces the excessive movement of data between memory and CPU, thereby improving overall energy efficiency. A major focus was on addressing the issue of high energy consumption in traditional architectures, as near-data approaches help in lowering power requirements and extending system lifetime. The speaker also discussed the role of runtime systems and Instruction Set Architecture (ISA), explaining how architectural support is essential for enabling processors to directly interact with memory units. This innovation not only enhances efficiency but also contributes to the reduction of the carbon footprint of large-scale data centers, aligning with global green technology goals. Furthermore, the lecture underlined the relevance of NDP in data-driven applications such as Artificial Intelligence, Big Data, and Machine Learning, where bringing computation closer to storage significantly reduces latency and improves processing speed. The talk concluded by addressing the trade-off between the increasing capacity of modern processors and the corresponding rise in power consumption, stressing how near data processing provides a balanced approach to achieving both high performance and energy optimization.",
+      image:"/gallery/ndp-1.png"
     },
     {
       id: 2,
-      title: "AI & Machine Learning Bootcamp",
-      date: "February 28, 2024",
-      time: "10:00 AM",
-      location: "Main Auditorium",
-      attendees: "120+",
+      title: "The CIPHER SAGA",
+      date: "6th September, 2025",
+      location: "Newton Hall, CB-G18",
+      attendees: "Various",
       status: "COMPLETED",
-      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1000&auto=format&fit=crop",
-      description: "Intensive bootcamp on AI/ML concepts using Microsoft Cognitive Services.",
-      rating: "4.9"
-    },
-    {
-      id: 3,
-      title: "React Development Workshop",
-      date: "February 10, 2024",
-      time: "3:00 PM",
-      location: "Seminar Hall 2",
-      attendees: "75+",
-      status: "COMPLETED",
-      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-      description: "Building modern web applications with React and TypeScript.",
-      rating: "4.7"
-    },
-    {
-      id: 4,
-      title: "Microsoft Hackathon 2024",
-      date: "April 1-3, 2024",
-      time: "48 Hours",
-      location: "Main Campus",
-      attendees: "200+",
-      status: "UPCOMING",
-      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1000&auto=format&fit=crop",
-      description: "48-hour coding challenge with Microsoft technologies.",
-      rating: "N/A"
+      description: "The Cipher Saga, a cybersecurity competition, was successfully conducted on September 6, 2025, at Newton Hall, AB1 and CB-G18, from 9:00 AM to 6:00 PM. Organized by the Microsoft Student Chapter, in collaboration with Null Chapter, the event aimed to enhance students' cybersecurity skills through practical challenges. The competition featured a multi-round format designed to progressively test participants' technical abilities. Beginning with an online screening round that assessed logical and analytical skills, participants advanced through three main rounds: 'The Deception' focused on digital forensics and coding puzzles, 'The Cryptic' challenged teams with classical ciphers and encryption tasks, and 'The Final Escape' presented a comprehensive Capture the Flag (CTF) experience covering web security, network forensics, steganography, reverse engineering, etc. The event successfully engaged students in hands-on cybersecurity challenges, promoting teamwork and problem-solving under pressure. Participants gained valuable exposure to real-world security scenarios. The competition effectively achieved its objectives of building cybersecurity awareness, strengthening technical skills, and fostering collaborative learning among participants.",
+      winner: {
+        name: "Vatanesh Sharma & Atharv Sharma",
+        position: "1st Place"
+      },
+      runnerUp1: {
+        name: "Surya D Naidu & Tarini Bandlamudi",
+        position: "2nd Place"
+      },
+      runnerUp2: {
+        name: "TBD",
+        position: "3rd Place"
+      },
+      image:"/gallery/cipher-1.png"
     },
     {
       id: 5,
-      title: "Cybersecurity Summit",
-      date: "April 20, 2024",
-      time: "9:00 AM",
-      location: "Conference Hall",
-      attendees: "100+",
-      status: "UPCOMING",
-      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop",
-      description: "Learn about modern cybersecurity practices and Microsoft security tools.",
-      rating: "N/A"
+      title: "DSA Quest: Fast & Furious Edition",
+      date: "28th (Online) and 30th August, 2025 (Offline)",
+      location: "AB-1 Newton Hall",
+      attendees: "Various",
+      status: "COMPLETED",
+      description: "DSA QUEST: Fast & Furious Edition – A Battle of Speed and Precision The Microsoft Student Chapter proudly hosted DSA QUEST: Fast & Furious Edition on August 28th and 30th, 2025, a high-stakes coding contest that brought together some of the brightest problem solvers. The event was designed to test participants' mastery of data structures and algorithms (DSA) while pushing their limits of speed, logic, and precision. The competition unfolded in three intense rounds, each crafted to challenge a different dimension of coding expertise: Round 1 – Ride or Die MCQ: Participants started with a rapid-fire set of multiple-choice questions, ranging from fundamentals to edge cases. This round acted as a filter for sharp thinkers who could balance accuracy along with speed. Round 2 – Code it to the Max: Qualifiers advanced to hands-on coding, solving algorithmic and DSA-based problems of varying difficulty. With the leaderboard ticking and time pressure mounting, participants showcased not just their problem-solving ability but also their efficiency in coding under stress. Round 3 – Rapid Fire League: The grand finale tested the best of the best. Eight finalists battled through an application-based, difficult DSA challenge in a knockout format (8 → 4 → 2 → 1). Evaluated by a panel of faculty members, this round demanded clarity of thought, adaptability, and nerves of steel. To keep the competitive spirit high, the event offered a prize pool of ₹3,000. The event was not just about winning—it was about learning, experiencing real-time pressure, and growing as a problem solver. The participants walked away with sharpened coding reflexes, exposure to competitive environments, and the thrill of tackling problems head-on. Events like DSA QUEST stand as proof that competitive coding is more than just algorithms—it's about resilience, focus, and the pursuit of excellence.",
+      winner: {
+        name: "ATHIPATLA DEERAJ KUMAR (22BCE8574)",
+        position: "Winner"
+      },
+      runnerUp1: {
+        name: "MAMIDI GIRI NAGA VENKATA RANGA PRANEETH (23BCE9683)",
+        position: "1st Runner-Up"
+      },
+      runnerUp2: {
+        name: "VAISHYARAJU HARSHITHA (23BCE9773)",
+        position: "2nd Runner-Up"
+      },
+      image:"/gallery/dsa-fast-2.png"
     }
   ];
 

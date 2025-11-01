@@ -10,6 +10,7 @@ import certificateRoutes from './routes/certificates.js';
 import contactRoutes from './routes/contact.js';
 import joinRoutes from './routes/join.js';
 import adminRoutes from './routes/admin.js';
+import teamRoutes from './routes/team.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -65,6 +66,7 @@ app.use('/api/certificates', certificateRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/join', joinRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/team', teamRoutes);
 
 // API info
 app.get('/api', (req, res) => {
@@ -78,7 +80,8 @@ app.get('/api', (req, res) => {
       certificates: '/api/certificates',
       contact: '/api/contact',
       join: '/api/join',
-      admin: '/api/admin'
+      admin: '/api/admin',
+      team: '/api/team'
     }
   });
 });
