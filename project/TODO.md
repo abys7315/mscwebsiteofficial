@@ -19,6 +19,6 @@
 
 ## Followup Steps
 - [x] Run the development server to test the changes (Server running at http://localhost:5174/)
-- [ ] Test the component on different screen sizes
-- [ ] Verify touch gestures work on mobile devices
-- [ ] Confirm 3D effect works on desktop
+- [x] Test the component on different screen sizes (Mobile detection works on refresh)
+- [x] Verify touch gestures work on mobile devices
+- [x] Confirm 3D effect works on desktop
