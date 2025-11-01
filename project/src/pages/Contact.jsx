@@ -42,9 +42,8 @@ const Contact = () => {
             </h2>
             <div className="space-y-6">
               {[
-                { icon: Mail, text: "contact@msc-vitap.org", color: "apple-blue" },
-                { icon: Phone, text: "+91 (555) 123-4567", color: "purple-500" },
-                { icon: MapPin, text: "VIT-AP University, Amaravati, Andhra Pradesh", color: "apple-blue" }
+                { icon: Mail, text: "microsoft.chap@vitap.ac.in", color: "apple-blue" },
+                { icon: MapPin, text: "VIT-AP University, Amaravati", color: "apple-blue" }
               ].map((contact, index) => (
                 <motion.div
                   key={index}
@@ -66,13 +65,14 @@ const Contact = () => {
               </h3>
               <div className="flex gap-4">
                 {[
-                  { icon: Linkedin, color: "apple-blue" },
-                  { icon: Github, color: "purple-500" },
-                  { icon: Instagram, color: "apple-blue" }
+                  { icon: Linkedin, href: "https://www.linkedin.com/company/microsoft-student-chapter-vit-ap/", color: "apple-blue" },
+                  { icon: Instagram, href: "https://www.instagram.com/msc_vitap?igsh=MzBocmYwNXU2MTJj", color: "apple-blue" }
                 ].map((social, index) => (
                   <motion.a
                     key={index}
-                    href="#"
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}
                     className="apple-card p-2"
                   >
