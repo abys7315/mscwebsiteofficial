@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Users, Clock, MapPin, ArrowRight } from 'lucide-react';
+import { Calendar, Users, Clock, MapPin, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const BayWindowSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [hoverDirection, setHoverDirection] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
   const containerRef = useRef(null);
   const rotationIntervalRef = useRef(null);
 
@@ -95,12 +98,48 @@ const BayWindowSlider = () => {
         position: "2nd Runner-Up"
       },
       image:"/gallery/dsa-fast-2.png"
-  
+    }
   ];
+
+  // Mobile detection
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Touch handlers for mobile
+  const handleTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      setCurrentIndex((prev) => (prev + 1) % events.length);
+    } else if (isRightSwipe) {
+      setCurrentIndex((prev) => prev === 0 ? events.length - 1 : prev - 1);
+    }
+  };
 
   // Auto-rotation logic
   useEffect(() => {
-    if (!isHovering) {
+    if (!isHovering && !isMobile) {
       rotationIntervalRef.current = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % events.length);
       }, 4000);
@@ -115,7 +154,7 @@ const BayWindowSlider = () => {
         clearInterval(rotationIntervalRef.current);
       }
     };
-  }, [isHovering, events.length]);
+  }, [isHovering, isMobile, events.length]);
 
   // Hover-based rotation
   useEffect(() => {
@@ -203,7 +242,156 @@ const BayWindowSlider = () => {
     };
   };
 
-  return (
+  // Mobile horizontal slider layout
+  const renderMobileSlider = () => (
+    <div className="relative w-full h-[60vh] bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
+        <motion.div
+          className="absolute bottom-1/3 right-1/4 w-56 h-56 bg-purple-600/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.4, 0.6, 0.4],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
+
+      {/* Mobile Slider Container */}
+      <div className="relative w-full max-w-7xl mx-auto px-4 h-full flex items-center justify-center">
+        <div
+          ref={containerRef}
+          className="relative w-full h-80 overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {/* Mobile Cards Container */}
+          <motion.div
+            className="flex h-full"
+            animate={{ x: -currentIndex * 100 + '%' }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
+            {events.map((event, index) => (
+              <div key={event.id} className="flex-shrink-0 w-full h-full px-2">
+                <motion.div
+                  className="w-full h-full apple-card rounded-2xl overflow-hidden shadow-2xl shadow-apple-blue/20 border border-apple-blue/30"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Image Section */}
+                  <div className="relative h-40 overflow-hidden">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                    {/* Status Badge */}
+                    <div className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium ${
+                      event.status === 'COMPLETED'
+                        ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                        : 'bg-apple-blue/20 text-apple-blue border border-apple-blue/30'
+                    }`}>
+                      {event.status}
+                    </div>
+                  </div>
+
+                  {/* Content Section */}
+                  <div className="p-4 space-y-3">
+                    <h3 className="text-lg font-bold text-white line-clamp-2">
+                      {event.title}
+                    </h3>
+
+                    <p className="text-gray-300 text-sm line-clamp-3 leading-relaxed">
+                      {event.description}
+                    </p>
+
+                    {/* Event Details */}
+                    <div className="grid grid-cols-2 gap-2 text-xs">
+                      <div className="flex items-center gap-2 text-gray-400">
+                        <Calendar className="w-3 h-3 text-apple-blue" />
+                        <span className="truncate">{event.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-400">
+                        <MapPin className="w-3 h-3 text-purple-400" />
+                        <span className="truncate">{event.location}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-400">
+                        <Users className="w-3 h-3 text-apple-blue" />
+                        <span className="truncate">{event.attendees}</span>
+                      </div>
+                    </div>
+
+                    {/* Action Button */}
+                    <motion.button
+                      className="w-full apple-button text-white py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 flex items-center justify-center gap-2 group"
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <span>Learn More</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </motion.button>
+                  </div>
+                </motion.div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Mobile Navigation Arrows */}
+          <button
+            onClick={() => setCurrentIndex((prev) => prev === 0 ? events.length - 1 : prev - 1)}
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors z-10"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <button
+            onClick={() => setCurrentIndex((prev) => (prev + 1) % events.length)}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors z-10"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          {/* Mobile Dots */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+            {events.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex
+                    ? 'bg-apple-blue shadow-lg shadow-apple-blue/50 scale-125'
+                    : 'bg-gray-600 hover:bg-gray-500'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Desktop 3D carousel layout
+  const renderDesktopCarousel = () => (
     <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
@@ -219,7 +407,7 @@ const BayWindowSlider = () => {
             ease: "easeInOut"
           }}
         />
-        
+
         <motion.div
           className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl"
           animate={{
@@ -239,9 +427,9 @@ const BayWindowSlider = () => {
         {/* 3D Carousel Container */}
         <div
           ref={containerRef}
-          className="relative h-48 md:h-64 lg:h-80 xl:h-96 w-full flex items-center justify-center cursor-pointer"
-          style={{ 
-            perspective: window.innerWidth < 640 ? '800px' : 
+          className="relative h-64 md:h-80 lg:h-96 w-full flex items-center justify-center cursor-pointer"
+          style={{
+            perspective: window.innerWidth < 640 ? '800px' :
                         window.innerWidth < 1024 ? '1000px' : '1200px',
             transformStyle: 'preserve-3d'
           }}
@@ -401,6 +589,9 @@ const BayWindowSlider = () => {
       </div>
     </div>
   );
+
+  // Main render function
+  return isMobile ? renderMobileSlider() : renderDesktopCarousel();
 };
 
 export default BayWindowSlider;
