@@ -108,9 +108,9 @@ const Navbar = () => {
                     onClick={() => setIsOpen(false)}
                     className={({ isActive }) =>
                       `block py-3 text-sm font-medium transition-all duration-100 ease-out ${
-                        isActive 
-                          ? 'text-blue-600 font-semibold' 
-                          : 'text-gray-700 hover:text-blue-600 hover:translate-x-2'
+                        isActive
+                          ? 'text-blue-600 font-semibold'
+                          : 'text-gray-900 dark:text-gray-300 hover:text-blue-600 hover:translate-x-2'
                       }`
                     }
                   >
