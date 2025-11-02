@@ -465,7 +465,7 @@ const Team = () => {
                       style={{ backgroundColor: selectedMember.departmentColor }}
                     />
 
-                    {/* Animated Circle Container */}
+                      {/* Animated Circle Container */}
                     <motion.div
                       initial={{ scale: 0, rotate: -180 }}
                       animate={{ scale: 1, rotate: 0 }}
@@ -476,6 +476,21 @@ const Team = () => {
                       }}
                       className="relative"
                     >
+                      {/* Pulsing Glow Effect */}
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.1, 1],
+                          opacity: [0.3, 0.6, 0.3]
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                        className="absolute inset-0 rounded-full blur-xl"
+                        style={{ backgroundColor: selectedMember.departmentColor }}
+                      />
+
                       {/* Outer Ring */}
                       <div
                         className="absolute inset-0 rounded-full border-4 opacity-30"
@@ -491,7 +506,7 @@ const Team = () => {
                           ease: [0.23, 1, 0.32, 1],
                           delay: 0.5
                         }}
-                        className="w-40 h-40 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white/20 shadow-2xl"
+                        className="w-40 h-40 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white/20 shadow-2xl relative z-10"
                       >
                         <img
                           src={selectedMember.image}
@@ -499,21 +514,6 @@ const Team = () => {
                           className="w-full h-full object-cover"
                         />
                       </motion.div>
-
-                      {/* Pulsing Glow Effect */}
-                      <motion.div
-                        animate={{
-                          scale: [1, 1.1, 1],
-                          opacity: [0.3, 0.6, 0.3]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                        className="absolute inset-0 rounded-full blur-xl"
-                        style={{ backgroundColor: selectedMember.departmentColor }}
-                      />
                     </motion.div>
                   </div>
 
