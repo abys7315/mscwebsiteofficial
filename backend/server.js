@@ -8,7 +8,6 @@ import authRoutes from './routes/auth.js';
 import eventRoutes from './routes/events.js';
 import certificateRoutes from './routes/certificates.js';
 import contactRoutes from './routes/contact.js';
-import joinRoutes from './routes/join.js';
 import adminRoutes from './routes/admin.js';
 import teamRoutes from './routes/team.js';
 import { errorHandler } from './middleware/errorHandler.js';
@@ -64,7 +63,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/certificates', certificateRoutes);
 app.use('/api/contact', contactRoutes);
-app.use('/api/join', joinRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/team', teamRoutes);
 

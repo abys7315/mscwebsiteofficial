@@ -1,24 +1,28 @@
-# TODO: Make Event Slideshow Responsive for Mobile
+# TODO: Remove "Join Us" from Navbar and All Related Links
 
 ## Current Status
-- BayWindowSlider component has been updated with responsive design
-- Added mobile detection logic (screen width < 768px)
-- Implemented horizontal slider layout for mobile with touch/swipe support
-- Kept 3D circular carousel for desktop screens
+- Plan confirmed to remove join functionality from the application
 
 ## Tasks Completed
-- [x] Add mobile detection logic (screen width < 768px)
-- [x] Implement horizontal slider layout for mobile devices
-- [x] Add touch/swipe support for mobile navigation
-- [x] Keep 3D circular carousel for desktop screens
-- [x] Ensure smooth transitions between layouts
-- [x] Update card sizing and spacing for mobile layout
+- [x] Remove 'Join' item from navItems array in project/src/components/Navbar.jsx
+- [x] Check and remove '/join' route in project/src/App.jsx
+- [x] Delete join-related files:
+  - [x] project/src/pages/JoinForm.jsx
+  - [x] backend/controllers/joinController.js
+  - [x] backend/models/JoinRequest.js
+  - [x] backend/routes/join.js
 
 ## Files Edited
-- [x] project/src/components/BayWindowSlider.jsx
+- [x] project/src/components/Navbar.jsx
+- [x] project/src/App.jsx
+
+## Files Deleted
+- [x] project/src/pages/JoinForm.jsx
+- [x] backend/controllers/joinController.js
+- [x] backend/models/JoinRequest.js
+- [x] backend/routes/join.js
 
 ## Followup Steps
-- [x] Run the development server to test the changes (Server running at http://localhost:5174/)
-- [x] Test the component on different screen sizes (Mobile detection works on refresh)
-- [x] Verify touch gestures work on mobile devices
-- [x] Confirm 3D effect works on desktop
+- [ ] Verify navbar no longer shows "Join" link
+- [ ] Confirm no broken links or routes
+- [ ] Test the application to ensure removal doesn't affect other functionality

@@ -28,22 +28,22 @@ const Home = () => {
   const features = [
     {
       icon: Zap,
-      title: "Innovation First",
-      description: "Cutting-edge Microsoft technologies and development practices",
+      title: "Tech Workshops & Training",
+      description: "Hands-on sessions on Azure, AI, and cloud computing - from basics to advanced levels",
       image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop",
       color: "#007AFF"
     },
     {
       icon: Trophy,
-      title: "Excellence Driven",
-      description: "Premium workshops, hackathons, and technical excellence",
+      title: "Hackathons & Competitions",
+      description: "Monthly coding challenges, inter-college hackathons, and innovation contests with real prizes",
       image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1000&auto=format&fit=crop",
       color: "#5856D6"
     },
     {
       icon: Users,
-      title: "Community Focused",
-      description: "Building connections with industry leaders and peers",
+      title: "Industry Connections",
+      description: "Direct access to Microsoft experts, internships, and networking with tech professionals",
       image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
       color: "#007AFF"
     }
@@ -52,7 +52,6 @@ const Home = () => {
   const stats = [
     { number: 150, suffix: "+", label: "Active Members", icon: Users, color: "#007AFF" },
     { number: 15, suffix: "+", label: "Events Hosted", icon: Calendar, color: "#5856D6" },
-    { number: 10, suffix: "+", label: "Projects Completed", icon: Award, color: "#007AFF" },
     { number: 1, suffix: "", label: "Industry Partners", icon: Star, color: "#5856D6" }
   ];
 
@@ -228,7 +227,7 @@ const Home = () => {
               <div className="h-px w-20 bg-gradient-to-l from-purple-500 to-transparent"></div>
             </div>
             <p className="text-xl text-apple-gray-600 dark:text-apple-gray-300 max-w-3xl mx-auto">
-              Comprehensive programs designed for technical excellence
+              Real-world tech skills, competitive events, and professional networking opportunities
             </p>
           </motion.div>
 
@@ -253,12 +252,7 @@ const Home = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                   
-                  {/* Feature Icon */}
-                  <div className="absolute bottom-4 left-4">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/90 dark:bg-black/90 backdrop-blur-sm">
-                      <feature.icon className="w-6 h-6" style={{ color: feature.color }} />
-                    </div>
-                  </div>
+
                 </div>
                 
                 <div className="p-6">
@@ -300,7 +294,7 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-4 gap-8 text-center">
+          <div className="grid md:grid-cols-3 gap-8 text-center">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}

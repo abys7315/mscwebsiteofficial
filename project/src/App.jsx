@@ -14,7 +14,7 @@ import Team from './pages/Team';
 import Contact from './pages/Contact';
 import CertificateValidation from './pages/CertificateValidation';
 import Collaborate from './pages/Collaborate';
-import JoinForm from './pages/JoinForm';
+
 import AdminDashboard from './pages/admin/AdminDashboard';
 import EventManagement from './pages/admin/EventManagement';
 import CertificateManagement from './pages/admin/CertificateManagement';
@@ -35,7 +35,6 @@ function App() {
             <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
             <Route path="/certificate" element={<PageTransition><CertificateValidation /></PageTransition>} />
             <Route path="/collaborate" element={<PageTransition><Collaborate /></PageTransition>} />
-            <Route path="/join" element={<PageTransition><JoinForm /></PageTransition>} />
             <Route path="/admin" element={<PageTransition><AdminDashboard /></PageTransition>} />
             <Route path="/admin/events" element={<PageTransition><EventManagement /></PageTransition>} />
             <Route path="/admin/certificates" element={<PageTransition><CertificateManagement /></PageTransition>} />
