@@ -51,8 +51,7 @@ const Home = () => {
 
   const stats = [
     { number: 150, suffix: "+", label: "Active Members", icon: Users, color: "#007AFF" },
-    { number: 15, suffix: "+", label: "Events Hosted", icon: Calendar, color: "#5856D6" },
-    { number: 1, suffix: "", label: "Industry Partners", icon: Star, color: "#5856D6" }
+    { number: 15, suffix: "+", label: "Events Hosted", icon: Calendar, color: "#5856D6" }
   ];
 
   // Animated Counter Component
@@ -294,7 +293,7 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 text-center">
+          <div className="grid md:grid-cols-2 gap-8 text-center max-w-4xl mx-auto">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}

@@ -11,6 +11,7 @@ import Events from './pages/Events';
 import Gallery from './pages/Gallery';
 import EventDetail from './pages/EventDetail';
 import Team from './pages/Team';
+import TeamDepartment from './pages/TeamDepartment';
 import Contact from './pages/Contact';
 import CertificateValidation from './pages/CertificateValidation';
 import Collaborate from './pages/Collaborate';
@@ -32,6 +33,7 @@ function App() {
             <Route path="/gallery" element={<PageTransition><Gallery /></PageTransition>} />
             <Route path="/event/:id" element={<PageTransition><EventDetail /></PageTransition>} />
             <Route path="/team" element={<PageTransition><Team /></PageTransition>} />
+            <Route path="/team/:department" element={<PageTransition><TeamDepartment /></PageTransition>} />
             <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
             <Route path="/certificate" element={<PageTransition><CertificateValidation /></PageTransition>} />
             <Route path="/collaborate" element={<PageTransition><Collaborate /></PageTransition>} />

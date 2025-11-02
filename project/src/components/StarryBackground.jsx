@@ -22,13 +22,13 @@ const StarryBackground = () => {
     });
   };
 
-  // Create different star layers for depth (reduced counts for performance)
-  const smallStars = generateStars(50, 'small');
-  const mediumStars = generateStars(20, 'medium');
-  const largeStars = generateStars(10, 'large');
-  const brightStars = generateStars(5, 'bright');
+  // Create different star layers for depth (90% reduction for performance)
+  const smallStars = generateStars(5, 'small');
+  const mediumStars = generateStars(2, 'medium');
+  const largeStars = generateStars(1, 'large');
+  const brightStars = generateStars(1, 'bright');
 
-  // Generate star clusters (reduced for performance)
+  // Generate star clusters (90% reduction for performance)
   const generateCluster = (centerX, centerY, starCount) => {
     return Array.from({ length: starCount }, (_, i) => ({
       id: `cluster-${centerX}-${centerY}-${i}`,
@@ -42,9 +42,7 @@ const StarryBackground = () => {
   };
 
   const clusters = [
-    ...generateCluster(20, 30, 3),
-    ...generateCluster(75, 15, 3),
-    ...generateCluster(85, 70, 3),
+    ...generateCluster(20, 30, 1),
   ];
 
   return (
@@ -240,9 +238,9 @@ const StarryBackground = () => {
         />
       ))}
 
-      {/* Subtle Twinkling Dust (reduced for performance) */}
+      {/* Subtle Twinkling Dust */}
       <div className="absolute inset-0">
-        {Array.from({ length: 30 }, (_, i) => (
+        {Array.from({ length: 15 }, (_, i) => (
           <motion.div
             key={`dust-${i}`}
             className="absolute w-px h-px bg-slate-400 rounded-full"

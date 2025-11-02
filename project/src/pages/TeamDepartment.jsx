@@ -1,22 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, Code, Calendar, Megaphone, Palette, PenTool, X, ExternalLink } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Users, Code, Calendar, Megaphone, Palette, PenTool, X, ExternalLink, ArrowLeft } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
 import StarryBackground from '../components/StarryBackground';
 import teamData from './team.json';
 
-const Team = () => {
+const TeamDepartment = () => {
+  const { department } = useParams();
   const navigate = useNavigate();
   const [selectedMember, setSelectedMember] = useState(null);
-
-  /*React.useEffect(() => {
-    if (selectedMember) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [selectedMember]);*/
-
 
   // Utility function to convert Google Drive links to direct image URLs
   const convertDriveLinkToImageUrl = (driveLink) => {
@@ -29,25 +21,25 @@ const Team = () => {
 
   // Department mapping and configuration
   const departmentConfig = {
-    'Admin': { icon: Users, color: '#007AFF', description: 'Leadership and organizational management' },
-    'Technical': { icon: Code, color: '#5856D6', description: 'Development and technical innovation' },
-    'Events': { icon: Calendar, color: '#34C759', description: 'Event planning and coordination' },
-    'Outreach': { icon: Megaphone, color: '#FF9500', description: 'Community engagement and partnerships' },
-    'Design': { icon: Palette, color: '#FF2D92', description: 'Creative design and visual content' },
-    'Content': { icon: PenTool, color: '#5AC8FA', description: 'Content creation and storytelling' },
-    'Documentation': { icon: PenTool, color: '#5AC8FA', description: 'Technical documentation and guides' },
-    'Marketing': { icon: Megaphone, color: '#FF9500', description: 'Brand promotion and marketing' },
-    'Social Media': { icon: Megaphone, color: '#FF9500', description: 'Digital presence and engagement' },
-    'PR & Outreach': { icon: Megaphone, color: '#FF9500', description: 'Public relations and outreach' },
-    'Hi-Tech': { icon: Code, color: '#5856D6', description: 'Advanced technology solutions' },
-    'Hi Tech': { icon: Code, color: '#5856D6', description: 'Advanced technology solutions' },
-    'Research and development': { icon: Code, color: '#5856D6', description: 'Innovation and R&D initiatives' },
-    'Creative/Design': { icon: Palette, color: '#FF2D92', description: 'Creative design and visual content' },
-    'Creative': { icon: Palette, color: '#FF2D92', description: 'Creative design and visual content' },
-    'CREATIVE': { icon: Palette, color: '#FF2D92', description: 'Creative design and visual content' },
-    'Event Management': { icon: Calendar, color: '#34C759', description: 'Event planning and coordination' },
-    'Event Management Department': { icon: Calendar, color: '#34C759', description: 'Event planning and coordination' },
-    'Event management': { icon: Calendar, color: '#34C759', description: 'Event planning and coordination' }
+    'Admin': { icon: Users, color: '#007AFF' },
+    'Technical': { icon: Code, color: '#5856D6' },
+    'Events': { icon: Calendar, color: '#34C759' },
+    'Outreach': { icon: Megaphone, color: '#FF9500' },
+    'Design': { icon: Palette, color: '#FF2D92' },
+    'Content': { icon: PenTool, color: '#5AC8FA' },
+    'Documentation': { icon: PenTool, color: '#5AC8FA' },
+    'Marketing': { icon: Megaphone, color: '#FF9500' },
+    'Social Media': { icon: Megaphone, color: '#FF9500' },
+    'PR & Outreach': { icon: Megaphone, color: '#FF9500' },
+    'Hi-Tech': { icon: Code, color: '#5856D6' },
+    'Hi Tech': { icon: Code, color: '#5856D6' },
+    'Research and development': { icon: Code, color: '#5856D6' },
+    'Creative/Design': { icon: Palette, color: '#FF2D92' },
+    'Creative': { icon: Palette, color: '#FF2D92' },
+    'CREATIVE': { icon: Palette, color: '#FF2D92' },
+    'Event Management': { icon: Calendar, color: '#34C759' },
+    'Event Management Department': { icon: Calendar, color: '#34C759' },
+    'Event management': { icon: Calendar, color: '#34C759' }
   };
 
   // Map designation to department
@@ -95,112 +87,98 @@ const Team = () => {
     return mapping[designation] || 'Technical'; // default to Technical
   };
 
-  // Define department order priority
-  const departmentOrder = [
-    'Admin',
-    'Technical',
-    'Hi-Tech',
-    'Marketing',
-    'Design/Creative',
-    'Documentation',
-    'Event Management',
-    'PR & Outreach',
-    'Research and Development',
-    'Social Media'
-  ];
-
-  // Separate departments into main and special sections
-  const mainDepartments = ['Admin', 'Technical','Hi-Tech',  'Marketing', 'Design/Creative', 'Documentation', 'Event Management', 'PR & Outreach','Social Media','Research and Development'];
-  const specialDepartments = [ ];
-
-  // Process team data with memoization for performance
-  const departments = useMemo(() => {
+  // Process team data for the specific department
+  const departmentData = useMemo(() => {
     const departmentMap = {};
 
     teamData.forEach(member => {
-      const departmentName = mapDesignationToDepartment(member.Designation);
-      if (!departmentMap[departmentName]) {
-        departmentMap[departmentName] = [];
+      const deptName = mapDesignationToDepartment(member.Designation);
+      if (!departmentMap[deptName]) {
+        departmentMap[deptName] = [];
       }
 
-      departmentMap[departmentName].push({
+      departmentMap[deptName].push({
         name: member.FullName,
         role: member.TeamMember,
         image: member.image || convertDriveLinkToImageUrl(member.DriveLink),
         bio: member.Bio,
         skills: member.Skills,
         linkedin: member.LinkedIn && member.LinkedIn !== 'NA' && member.LinkedIn !== '' ? member.LinkedIn : null,
-        designation: member.Designation // Add designation for sorting
+        designation: member.Designation
       });
     });
 
-    // Sort departments based on the defined order
-    const sortedDepartments = Object.keys(departmentMap)
-      .sort((a, b) => {
-        const indexA = departmentOrder.indexOf(a);
-        const indexB = departmentOrder.indexOf(b);
+    const dept = departmentMap[department];
+    if (!dept) return null;
 
-        // If both departments are in the order list, sort by their position
-        if (indexA !== -1 && indexB !== -1) {
-          return indexA - indexB;
-        }
+    const config = departmentConfig[department] || { icon: Code, color: '#5856D6' };
 
-        // If only one is in the list, prioritize the one that is
-        if (indexA !== -1) return -1;
-        if (indexB !== -1) return 1;
+    return {
+      name: department,
+      icon: config.icon,
+      color: config.color,
+      members: dept.sort((a, b) => {
+        // Define role hierarchy for sorting
+        const roleOrder = {
+          'Chief Advisor': 0,
+          'Deputy Chief Advisor': 1,
+          'President' : 2,
+          'Vice President':3,
+          'Director': 4,
+          'Executive Secretary': 7,
+          'Joint Secretary': 8,
+          'Secretary': 6,
+          'Treasurer':9,
+          'Deputy Tech Manager': 11,
+          'Deputy Club Manager': 13,
+          'Head of internal affairs': 20,
+          'Head of external affairs': 19,
+          'Club Manager': 12,
+          'Community Manager':17,
+          'Assistant Community Manager':18,
+          'Lead': 21,
+          'Co-Lead': 22,
+          'Coordinator': 23,
+          'Member': 24
+        };
 
-        // If neither is in the list, maintain alphabetical order
-        return a.localeCompare(b);
-      })
-      .map(deptName => ({
-        name: deptName,
-        icon: departmentConfig[deptName]?.icon || Code,
-        color: departmentConfig[deptName]?.color || '#5856D6',
-        members: departmentMap[deptName].sort((a, b) => {
-          // Define role hierarchy for sorting
-          const roleOrder = {
-            'Chief Advisor': 0,
-            'Deputy Chief Advisor': 1,
-            'President' : 2,
-            'Vice President':3,
-            'Director': 4,
-            'Executive Secretary': 7,
-            'Joint Secretary': 8,
-            'Secretary': 6,
-            'Treasurer':9,
-            'Deputy Tech Manager': 11,
-            'Deputy Club Manager': 13,
-            'Head of internal affairs': 20,
-            'Head of external affairs': 19,
-            'Club Manager': 12,
-            'Community Manager':17,
-            'Assistant Community Manager':18,
-            'Lead': 21,
-            'Co-Lead': 22,
-            'Coordinator': 23,
-            'Member': 24
-          };
-
-          const getRolePriority = (role) => {
-            for (const [key, priority] of Object.entries(roleOrder)) {
-              if (role.toLowerCase().includes(key.toLowerCase())) {
-                return priority;
-              }
+        const getRolePriority = (role) => {
+          for (const [key, priority] of Object.entries(roleOrder)) {
+            if (role.toLowerCase().includes(key.toLowerCase())) {
+              return priority;
             }
-            return 99; // Default priority for unknown roles
-          };
+          }
+          return 99; // Default priority for unknown roles
+        };
 
-          const priorityA = getRolePriority(a.role);
-          const priorityB = getRolePriority(b.role);
+        const priorityA = getRolePriority(a.role);
+        const priorityB = getRolePriority(b.role);
 
-          return priorityA - priorityB;
-        })
-      }));
+        return priorityA - priorityB;
+      })
+    };
+  }, [department]);
 
-    return sortedDepartments;
-  }, []);
-
-
+  if (!departmentData) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-black relative flex items-center justify-center">
+        <div className="fixed inset-0 z-0">
+          <StarryBackground />
+        </div>
+        <div className="text-center z-10">
+          <h1 className="text-4xl font-bold text-apple-gray-900 dark:text-white mb-4">
+            Department Not Found
+          </h1>
+          <button
+            onClick={() => navigate('/team')}
+            className="px-6 py-3 bg-apple-blue text-white rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Back to Team
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-black relative">
@@ -208,12 +186,24 @@ const Team = () => {
       <div className="fixed inset-0 z-0">
         <StarryBackground />
       </div>
-      
+
       <div className="container mx-auto px-4 py-20 relative z-10">
         {/* Section Background Overlay */}
         <div className="absolute inset-0 bg-black/20 -mx-4"></div>
-        
+
         <div className="relative z-10">
+          {/* Back Button */}
+          <motion.button
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+            onClick={() => navigate('/team')}
+            className="flex items-center gap-2 mb-8 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-lg hover:bg-white/20 transition-all duration-300"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Teams
+          </motion.button>
+
           {/* Title */}
           <motion.div
             initial={{ y: -50, opacity: 0 }}
@@ -222,150 +212,103 @@ const Team = () => {
             className="text-center mb-16"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6 apple-text-gradient">
-              Meet Our Team
+              {departmentData.name}
             </h1>
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="h-px w-20 bg-gradient-to-r from-apple-blue to-transparent"></div>
-              <Users className="w-6 h-6 text-apple-blue" />
+              <departmentData.icon className="w-6 h-6 text-apple-blue" />
               <div className="h-px w-20 bg-gradient-to-l from-purple-500 to-transparent"></div>
             </div>
             <p className="text-lg text-apple-gray-600 dark:text-apple-gray-300 max-w-2xl mx-auto">
-              Passionate individuals working together to build an amazing tech community
+              Meet the talented members of our {departmentData.name} team
             </p>
           </motion.div>
 
-          {/* Chief Advisor - Special Display at Top */}
-          {departments.find(d => d.name === 'Admin')?.members.find(m => m.role === 'Chief Advisor') && (
-            <motion.div
-              initial={{ y: 60, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, margin: "100px 0px" }}
-              transition={{
-                duration: 0.8,
-                ease: [0.23, 1, 0.32, 1]
-              }}
-              className="mb-16"
-            >
-              <div className="flex justify-center">
+          {/* Team Members Grid */}
+          <motion.div
+            initial={{ y: 60, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, margin: "100px 0px" }}
+            transition={{
+              duration: 0.8,
+              ease: [0.23, 1, 0.32, 1]
+            }}
+            className="apple-card p-8"
+          >
+            {/* Department Header */}
+            <div className="flex items-center gap-4 mb-8">
+              <div
+                className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                style={{ backgroundColor: `${departmentData.color}20` }}
+              >
+                <departmentData.icon
+                  className="w-8 h-8"
+                  style={{ color: departmentData.color }}
+                />
+              </div>
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-apple-gray-900 dark:text-white">
+                  {departmentData.name} Team
+                </h2>
+                <div
+                  className="h-1 w-20 rounded-full mt-2"
+                  style={{ backgroundColor: departmentData.color }}
+                />
+              </div>
+            </div>
+
+            {/* Members Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {departmentData.members.map((member, memberIndex) => (
                 <motion.div
+                  key={member.name}
+                  initial={{ y: 40, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    delay: memberIndex * 0.05,
+                    ease: [0.23, 1, 0.32, 1]
+                  }}
                   whileHover={{
                     y: -8,
                     transition: { duration: 0.2, ease: [0.23, 1, 0.32, 1] }
                   }}
-                  className="apple-card p-8 text-center group cursor-pointer max-w-md"
-                  onClick={() => setSelectedMember({
-                    ...departments.find(d => d.name === 'Admin').members.find(m => m.role === 'Chief Advisor'),
-                    department: 'Admin',
-                    departmentColor: '#007AFF'
-                  })}
+                  className="apple-card p-6 text-center group cursor-pointer"
+                  onClick={() => setSelectedMember({ ...member, department: departmentData.name, departmentColor: departmentData.color })}
                 >
                   {/* Member Photo */}
-                  <div className="relative mb-6">
+                  <div className="relative mb-4">
                     <img
-                      src={departments.find(d => d.name === 'Admin').members.find(m => m.role === 'Chief Advisor').image}
-                      alt={departments.find(d => d.name === 'Admin').members.find(m => m.role === 'Chief Advisor').name}
-                      className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white/20 group-hover:border-white/40 transition-all duration-300"
+                      src={member.image}
+                      alt={member.name}
+                      className="w-20 h-20 rounded-full mx-auto object-cover border-4 border-white/20 group-hover:border-white/40 transition-all duration-300"
+                      loading="lazy"
                     />
                     <div
                       className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl"
-                      style={{ backgroundColor: '#007AFF' }}
+                      style={{ backgroundColor: departmentData.color }}
                     />
                   </div>
 
                   {/* Member Info */}
-                  <h3 className="text-2xl font-semibold text-apple-gray-900 dark:text-white mb-2 group-hover:text-apple-blue transition-colors">
-                    {departments.find(d => d.name === 'Admin').members.find(m => m.role === 'Chief Advisor').name}
+                  <h3 className="text-lg font-semibold text-apple-gray-900 dark:text-white mb-2 group-hover:text-apple-blue transition-colors">
+                    {member.name}
                   </h3>
-                  <p className="text-apple-gray-600 dark:text-apple-gray-300 text-xl font-medium">
-                    {departments.find(d => d.name === 'Admin').members.find(m => m.role === 'Chief Advisor').role}
+                  <p className="text-apple-gray-600 dark:text-apple-gray-300 text-sm">
+                    {member.role}
                   </p>
 
                   {/* Hover Glow Effect */}
                   <div
                     className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none"
-                    style={{ backgroundColor: '#007AFF' }}
+                    style={{ backgroundColor: departmentData.color }}
                   />
                 </motion.div>
-              </div>
-            </motion.div>
-          )}
+              ))}
+            </div>
+          </motion.div>
 
-          {/* Department Cards */}
-          <div className="space-y-16">
-            <motion.div
-              initial={{ y: 60, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, margin: "100px 0px" }}
-              transition={{
-                duration: 0.8,
-                ease: [0.23, 1, 0.32, 1]
-              }}
-              className="apple-card p-8"
-            >
-              <h2 className="text-2xl md:text-3xl font-bold text-apple-gray-900 dark:text-white mb-8 text-center">
-                Our Departments
-              </h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {departments.map((department, deptIndex) => (
-                  <motion.div
-                    key={department.name}
-                    initial={{ y: 40, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 0.6,
-                      delay: deptIndex * 0.1,
-                      ease: [0.23, 1, 0.32, 1]
-                    }}
-                    whileHover={{
-                      y: -8,
-                      transition: { duration: 0.2, ease: [0.23, 1, 0.32, 1] }
-                    }}
-                    className="apple-card p-6 text-center group cursor-pointer"
-                    onClick={() => {
-                      navigate(`/team/${encodeURIComponent(department.name)}`);
-                      window.scrollTo(0, 0);
-                    }}
-                  >
-                    {/* Department Icon */}
-                    <div className="relative mb-4">
-                      <div
-                        className="w-20 h-20 rounded-2xl mx-auto flex items-center justify-center border-4 border-white/20 group-hover:border-white/40 transition-all duration-300"
-                        style={{ backgroundColor: `${department.color}20` }}
-                      >
-                        <department.icon
-                          className="w-10 h-10"
-                          style={{ color: department.color }}
-                        />
-                      </div>
-                      <div
-                        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-xl"
-                        style={{ backgroundColor: department.color }}
-                      />
-                    </div>
-
-                    {/* Department Info */}
-                    <h3 className="text-lg font-semibold text-apple-gray-900 dark:text-white mb-2 group-hover:text-apple-blue transition-colors">
-                      {department.name}
-                    </h3>
-                    <p className="text-apple-gray-600 dark:text-apple-gray-300 text-sm mb-2">
-                      {department.members.length} Members
-                    </p>
-
-                    {/* Hover Glow Effect */}
-                    <div
-                      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none"
-                      style={{ backgroundColor: department.color }}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-
-
-          
           {/* Team Stats */}
           <motion.div
             initial={{ y: 60, opacity: 0 }}
@@ -376,8 +319,8 @@ const Team = () => {
           >
             <div className="grid md:grid-cols-3 gap-8 text-center">
               {[
-                { number: teamData.length + "+", label: "Team Members", color: "#007AFF" },
-                { number: 10, label: "Departments", color: "#5856D6" },
+                { number: departmentData.members.length, label: "Team Members", color: departmentData.color },
+                { number: "10", label: "Department", color: "#5856D6" },
                 { number: "15+", label: "Events Organized", color: "#34C759" }
               ].map((stat, index) => (
                 <motion.div
@@ -385,14 +328,14 @@ const Team = () => {
                   initial={{ y: 40, opacity: 0, scale: 0.9 }}
                   whileInView={{ y: 0, opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ 
-                    duration: 0.6, 
+                  transition={{
+                    duration: 0.6,
                     delay: index * 0.1,
-                    ease: [0.23, 1, 0.32, 1] 
+                    ease: [0.23, 1, 0.32, 1]
                   }}
                   className="apple-card p-8"
                 >
-                  <div 
+                  <div
                     className="text-4xl md:text-5xl font-bold mb-2"
                     style={{ color: stat.color }}
                   >
@@ -420,7 +363,7 @@ const Team = () => {
               onClick={() => setSelectedMember(null)}
               style={{
     position: "absolute",
-    top: `${window.scrollY}px`, // 🪄 key part: position relative to current scroll
+    top: `${window.scrollY}px`,
   }}
             >
 
@@ -729,4 +672,4 @@ const Team = () => {
   );
 };
 
-export default Team;
+export default TeamDepartment;
