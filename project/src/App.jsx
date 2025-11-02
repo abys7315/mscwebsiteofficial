@@ -37,7 +37,7 @@ function App() {
             <Route path="/collaborate" element={<PageTransition><Collaborate /></PageTransition>} />
             <Route path="/admin" element={<PageTransition><AdminDashboard /></PageTransition>} />
             <Route path="/admin/events" element={<PageTransition><EventManagement /></PageTransition>} />
-            <Route path="/admin/certificates" element={<PageTransition><CertificateManagement /></PageTransition>} />
+
           </Routes>
         </AnimatePresence>
       </main>

@@ -42,7 +42,6 @@ const Footer = () => {
               {[
                 { path: '/', label: 'Home' },
                 { path: '/about', label: 'About' },
-                { path: '/events', label: 'Events' },
                 { path: '/gallery', label: 'Gallery' },
                 { path: '/team', label: 'Our Team' },
                 { path: '/contact', label: 'Contact' },
@@ -82,7 +81,7 @@ const Footer = () => {
           <div className="relative z-10">
             <h3 className="font-semibold text-lg mb-6 text-apple-gray-900 dark:text-white">Stay Updated</h3>
             <p className="text-apple-gray-600 dark:text-apple-gray-300 mb-4">
-              Subscribe for updates on events and activities.
+              Subscribe for updates on activities.
             </p>
             <form className="space-y-3">
               <input

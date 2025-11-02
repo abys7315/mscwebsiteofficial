@@ -167,7 +167,7 @@ const BayWindowSlider = () => {
             return prev === 0 ? events.length - 1 : prev - 1;
           }
         });
-      }, 800);
+      }, 1400);
 
       return () => clearInterval(rotationInterval);
     }

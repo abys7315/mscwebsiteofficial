@@ -10,6 +10,10 @@ const EventDetail = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   // This would ideally come from an API or context, but for now using the same data structure
   const events = [
     {

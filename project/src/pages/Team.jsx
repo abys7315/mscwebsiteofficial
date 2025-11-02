@@ -170,6 +170,7 @@ const Team = () => {
             'Head of internal affairs': 20,
             'Head of external affairs': 19,
             'Club Manager': 12,
+            'Community Manager':17,
             'Assistant Community Manager':18,
             'Lead': 21,
             'Co-Lead': 22,

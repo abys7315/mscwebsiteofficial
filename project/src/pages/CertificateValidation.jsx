@@ -6,7 +6,6 @@ import StarryBackground from '../components/StarryBackground';
 
 const CertificateValidation = () => {
   const [certificateId, setCertificateId] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
   const [searchResult, setSearchResult] = useState(null);
 
   const handleValidation = (e) => {
@@ -30,15 +29,7 @@ const CertificateValidation = () => {
     }
   };
 
-  const handleAdminLogin = () => {
-    const password = prompt('Enter admin password:');
-    if (password === 'admin123') {
-      setIsAdmin(true);
-      toast.success('Admin access granted');
-    } else {
-      toast.error('Invalid password');
-    }
-  };
+
 
   return (
     <div className="min-h-screen bg-white dark:bg-black relative">
@@ -123,39 +114,7 @@ const CertificateValidation = () => {
             </motion.div>
           )}
 
-          {!isAdmin && (
-            <div className="mt-8 text-center">
-              <button
-                onClick={handleAdminLogin}
-                className="text-sm text-apple-blue hover:underline"
-              >
-                Admin Access
-              </button>
-            </div>
-          )}
 
-          {isAdmin && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mt-8 apple-card p-6"
-            >
-              <h3 className="text-lg font-semibold mb-4 text-apple-gray-900 dark:text-white">
-                Admin Panel
-              </h3>
-              <div className="space-y-4">
-                <button className="w-full apple-button">
-                  Generate New Certificate
-                </button>
-                <button className="w-full apple-button">
-                  View All Certificates
-                </button>
-                <button className="w-full apple-button">
-                  Manage Templates
-                </button>
-              </div>
-            </motion.div>
-          )}
         </div>
       </motion.div>
         </div>

@@ -12,13 +12,7 @@ const AdminDashboard = () => {
       link: "/admin/events",
       color: "cyber-primary"
     },
-    {
-      title: "Certificate Management",
-      icon: Award,
-      description: "Generate and validate certificates",
-      link: "/admin/certificates",
-      color: "cyber-blue"
-    },
+
     {
       title: "Member Applications",
       icon: Users,
